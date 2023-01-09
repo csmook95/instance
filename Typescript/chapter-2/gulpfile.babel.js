@@ -28,8 +28,7 @@ const html = () => gulp.src(routes.html.src)
 
 const ts = () => gulp.src(routes.ts.src)
     .pipe(gts({
-        noImplicitAny: true,
-        outFile: `index.js`
+        noImplicitAny: true
     }))
     .pipe(gulp.dest(routes.ts.dest));
 
