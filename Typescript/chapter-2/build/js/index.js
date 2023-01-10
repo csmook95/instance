@@ -15,8 +15,9 @@ var RequestBuilder2 = /** @class */ (function () {
     };
     return RequestBuilder2;
 }());
-new RequestBuilder2()
+console.log(new RequestBuilder2()
     .setData({})
     .setMethod('post') // Try removing me!
     .setURL('bar') // Try removing me!
-    .build();
+    .build()
+    .method);

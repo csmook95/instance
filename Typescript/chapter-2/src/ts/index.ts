@@ -26,8 +26,11 @@ class RequestBuilder2 {
     }
 }
 
-new RequestBuilder2()
-    .setData({})
-    .setMethod('post') // Try removing me!
-    .setURL('bar') // Try removing me!
-    .build()
+console.log(
+    new RequestBuilder2()
+        .setData({})
+        .setMethod('post') // Try removing me!
+        .setURL('bar') // Try removing me!
+        .build()
+        .method
+)
