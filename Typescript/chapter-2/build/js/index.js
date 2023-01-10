@@ -1,21 +1,26 @@
-var is = function () {
-    var para = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        para[_i] = arguments[_i];
+var RequestBuilder1 = /** @class */ (function () {
+    function RequestBuilder1() {
+        this.method = null;
+        this.url = null;
+        this.data = null;
     }
-    var returnValue = true;
-    para
-        .slice(0)
-        .reduce(function (pre, cur, i, arr) {
-        if (pre !== cur) {
-            returnValue = false;
-            arr.splice(1);
-        }
-        return cur;
-    });
-    return returnValue;
-};
-console.log(is("string", "string"));
-console.log(is(true, false));
-console.log(is(42, 42));
-console.log(is(10, 10, 10, 10));
+    RequestBuilder1.prototype.setMethod = function (method) {
+        this.method = method;
+        return this;
+    };
+    RequestBuilder1.prototype.setURL = function (url) {
+        this.url = url;
+        return this;
+    };
+    RequestBuilder1.prototype.setData = function (data) {
+        this.data = data;
+        return this;
+    };
+    RequestBuilder1.prototype.send = function () { };
+    return RequestBuilder1;
+}());
+new RequestBuilder1()
+    .setURL("/users")
+    .setMethod("get")
+    .setData({ firstName: "Anna" })
+    .send();

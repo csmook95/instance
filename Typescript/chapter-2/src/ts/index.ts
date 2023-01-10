@@ -1,21 +1,26 @@
 
-type Is = <T extends unknown[]>(...a: T) => boolean
+class RequestBuilder1 {
+    private method: Method = null
+    private url: Url = null
+    private data: Data = null
 
-let is: Is = (...para) => {
-    let returnValue = true
-    para
-        .slice(0)
-        .reduce((pre, cur, i, arr) => {
-            if (pre !== cur) {
-                returnValue = false
-                arr.splice(1);
-            }
-            return cur;
-        });
-    return returnValue;
+    setMethod(method: Method): this {
+        this.method = method
+        return this
+    }
+    setURL(url: Url): this {
+        this.url = url
+        return this
+    }
+    setData(data: Data): this {
+        this.data = data
+        return this
+    }
+    send() { }
 }
 
-console.log(is(`string`, `string`));
-console.log(is(true, false));
-console.log(is(42, 42));
-console.log(is(10, 10, 10, 10));
+new RequestBuilder1()
+    .setURL(`/users`)
+    .setMethod(`get`)
+    .setData({ firstName: `Anna` })
+    .send()
