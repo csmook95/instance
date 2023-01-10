@@ -1,26 +1,22 @@
-var RequestBuilder1 = /** @class */ (function () {
-    function RequestBuilder1() {
-        this.method = null;
-        this.url = null;
-        this.data = null;
+var RequestBuilder2 = /** @class */ (function () {
+    function RequestBuilder2() {
     }
-    RequestBuilder1.prototype.setMethod = function (method) {
-        this.method = method;
+    RequestBuilder2.prototype.setData = function (data) {
+        return Object.assign(this, { data: data });
+    };
+    RequestBuilder2.prototype.setMethod = function (method) {
+        return Object.assign(this, { method: method });
+    };
+    RequestBuilder2.prototype.setURL = function (url) {
+        return Object.assign(this, { url: url });
+    };
+    RequestBuilder2.prototype.build = function () {
         return this;
     };
-    RequestBuilder1.prototype.setURL = function (url) {
-        this.url = url;
-        return this;
-    };
-    RequestBuilder1.prototype.setData = function (data) {
-        this.data = data;
-        return this;
-    };
-    RequestBuilder1.prototype.send = function () { };
-    return RequestBuilder1;
+    return RequestBuilder2;
 }());
-new RequestBuilder1()
-    .setURL("/users")
-    .setMethod("get")
-    .setData({ firstName: "Anna" })
-    .send();
+new RequestBuilder2()
+    .setData({})
+    .setMethod('post') // Try removing me!
+    .setURL('bar') // Try removing me!
+    .build();

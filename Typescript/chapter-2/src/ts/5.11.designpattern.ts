@@ -17,32 +17,33 @@ let Shoe = {
 Shoe.create(`boot`)
 
 // 빌더 패턴
-type Method = `get` | `post` | null
-type Url = string | null
-type Data = object | null
+type Method = `get` | `post`
+type Url = string
+type Data = object
 
 class RequestBuilder {
-    private method: Method = null
-    private url: Url = null
-    private data: Data = null
+    private method?: Method
+    private url?: Url
+    private data?: Data
 
-    setMethod(method: Method): this {
+    setMethod(method?: Method): this {
         this.method = method
         return this
     }
-    setURL(url: Url): this {
+    setURL(url?: Url): this {
         this.url = url
         return this
     }
-    setData(data: Data): this {
+    setData(data?: Data): this {
         this.data = data
         return this
     }
     send() { }
 }
 
-new RequestBuilder()
-    .setURL(`/users`)
-    .setMethod(`get`)
-    .setData({ firstName: `Anna` })
-    .send()
+console.log(
+    new RequestBuilder()
+        .setURL(`/users`)
+        .setData()
+        .setMethod(`get`)
+) 
