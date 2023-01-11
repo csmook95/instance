@@ -1,36 +1,18 @@
-type BuildableRequest = {
-    data?: Data
-    method: Method
-    url: Url
+interface Array<T> { zip<U>(list: U[]): [T, U][] }
+
+function tuple1<T extends unknown[]>(...ts: T): T {
+    return ts
 }
 
-class RequestBuilder2 {
-    data?: Data
-    method?: Method
-    url?: Url
+Array.prototype.zip = function <T, U>(
+    this: T[],
+    list: U[]
+): [T, U][] { return this.map((v, k) => tuple1(v, list[k])) }
 
-    setData(data: object): this & Pick<BuildableRequest, `data`> {
-        return Object.assign(this, { data })
-    }
-
-    setMethod(method: `get` | `post`): this & Pick<BuildableRequest, `method`> {
-        return Object.assign(this, { method })
-    }
-
-    setURL(url: string): this & Pick<BuildableRequest, `url`> {
-        return Object.assign(this, { url })
-    }
-
-    build(this: BuildableRequest) {
-        return this
-    }
-}
+let array1 = [1, 2, 3]
 
 console.log(
-    new RequestBuilder2()
-        .setData({})
-        .setMethod('post') // Try removing me!
-        .setURL('bar') // Try removing me!
-        .build()
-        .method
+    array1
+        .map(n => n * 2)
+        .zip([`a`, `b`, `c`])
 )

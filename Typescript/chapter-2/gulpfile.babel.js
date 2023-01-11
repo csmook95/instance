@@ -11,8 +11,8 @@ const routes = {
         dest: `build`
     },
     ts: {
-        watch: `src/ts/*.ts`,
-        src: `src/ts/*.ts`,
+        watch: `src/ts/**/*.ts`,
+        src: `src/ts/**/*.ts`,
         dest: `build/js`
     }
 }
