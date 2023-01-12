@@ -1,18 +1,18 @@
-interface Array<T> { zip<U>(list: U[]): [T, U][] }
-
-function tuple1<T extends unknown[]>(...ts: T): T {
-    return ts
+function ask() {
+    return prompt(`When is your birthday?`)
 }
 
-Array.prototype.zip = function <T, U>(
-    this: T[],
-    list: U[]
-): [T, U][] { return this.map((v, k) => tuple1(v, list[k])) }
+function parse(birthday: string | null): Date | null {
+    if (!birthday) return null
+    let date = new Date(birthday)
+    if (!isValid(date)) return null
+    return date
+}
 
-let array1 = [1, 2, 3]
+function isValid(date: Date) {
+    return Object.prototype.toString.call(date) === `[object Date]` && !Number.isNaN(date.getTime())
+}
 
-console.log(
-    array1
-        .map(n => n * 2)
-        .zip([`a`, `b`, `c`])
-)
+let date = parse(ask())
+if (date) console.info(`Date is`, date.toISOString());
+else console.error(`Error parsing date for some reason`)

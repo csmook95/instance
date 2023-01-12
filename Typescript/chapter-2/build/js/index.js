@@ -1,12 +1,19 @@
-function tuple1() {
-    var ts = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        ts[_i] = arguments[_i];
-    }
-    return ts;
+function ask() {
+    return prompt("When is your birthday?");
 }
-Array.prototype.zip = function (list) { return this.map(function (v, k) { return tuple1(v, list[k]); }); };
-var array1 = [1, 2, 3];
-console.log(array1
-    .map(function (n) { return n * 2; })
-    .zip(["a", "b", "c"]));
+function parse(birthday) {
+    if (!birthday)
+        return null;
+    var date = new Date(birthday);
+    if (!isValid(date))
+        return null;
+    return date;
+}
+function isValid(date) {
+    return Object.prototype.toString.call(date) === "[object Date]" && !Number.isNaN(date.getTime());
+}
+var date = parse(ask());
+if (date)
+    console.info("Date is", date.toISOString());
+else
+    console.error("Error parsing date for some reason");
