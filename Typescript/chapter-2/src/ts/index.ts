@@ -1,21 +1,19 @@
-import { appendFile, readFile } from "fs";
+import { readFile } from "fs"
 
-readFile(
-    `./src/files/exam.txt`,
-    { encoding: `utf8` },
-    (error, data) => {
-        if (error) {
-            console.error(`error reading!`, error)
-            return
-        }
-        console.info(`success reading! \n`, data)
+type Executor<T, E extends Error> = (
+    resolve: (result: T) => void,
+    reject: (error: E) => void
+) => void
+
+class Promise<T, E extends Error> {
+    constructor(f: Executor<T, E>) { }
+}
+
+function readFilePromise(path: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+        readFile(path, (error, result) => {
+            if (error) reject(error)
+            else resolve(result)
+        })
     })
-
-appendFile(`./src/files/exam.txt`,
-    `hibimama `,
-    error => {
-        if (error) console.error(`error writing!`, error)
-    })
-
-    
-
+}
