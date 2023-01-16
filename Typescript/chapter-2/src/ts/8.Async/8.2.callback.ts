@@ -1,13 +1,18 @@
-import { readFile } from "fs";
+import { appendFile, readFile } from "fs";
 
-
-readFile(`/var/log/apache2/access_log`,
+readFile(
+    `./src/files/exam.txt`,
     { encoding: `utf8` },
     (error, data) => {
         if (error) {
             console.error(`error reading!`, error)
             return
         }
-        console.info(`success reading!`, data)
-    }
-)
+        console.info(`success reading! \n`, data)
+    })
+
+appendFile(`./src/files/exam.txt`,
+    `New access log entry`,
+    error => {
+        if (error) console.error(`error writing!`, error)
+    })

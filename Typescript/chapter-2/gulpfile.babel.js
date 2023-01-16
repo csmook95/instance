@@ -27,9 +27,7 @@ const html = () => gulp.src(routes.html.src)
     .pipe(gulp.dest(routes.html.dest));
 
 const ts = () => gulp.src(routes.ts.src)
-    .pipe(gts({
-        noImplicitAny: true
-    }))
+    .pipe(gts({}))
     .pipe(gulp.dest(routes.ts.dest));
 
 const watch = () => {
