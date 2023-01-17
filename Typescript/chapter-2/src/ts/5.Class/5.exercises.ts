@@ -28,6 +28,7 @@ class RequestBuilder00 {
 
 class RequestBuilder1 extends RequestBuilder00 {
     protected type = `RequestBuilder1`
+    static ds() { }
     protected sendValid(): RequestBuilder0 {
         if (this.method && this.url) {
             return new RequestBuilder2(this.method, this.url, this.data)

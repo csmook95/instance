@@ -1,18 +1,19 @@
-interface Array<T> { zip<U>(list: U[]): [T, U][] }
+import { readFile } from "fs"
 
-function tuple1<T extends unknown[]>(...ts: T): T {
-    return ts
+type Executor<T, E extends Error> = (
+    resolve: (result: T) => void,
+    reject: (error: E) => void
+) => void
+
+class Promise<T, E extends Error> {
+    constructor(f: Executor<T, E>) { }
 }
 
-Array.prototype.zip = function <T, U>(
-    this: T[],
-    list: U[]
-): [T, U][] { return this.map((v, k) => tuple1(v, list[k])) }
-
-let array1 = [1, 2, 3]
-
-console.log(
-    array1
-        .map(n => n * 2)
-        .zip([`a`, `b`, `c`])
-)
+function readFilePromise(path: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+        readFile(path, (error, result) => {
+            if (error) reject(error)
+            else resolve(result)
+        })
+    })
+}
